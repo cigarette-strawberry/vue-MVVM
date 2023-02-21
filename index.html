@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MVVM</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <input type="text" v-model="school.name" />
+      <input type="text" v-model="school.age" />
+      <div>{{school.name}}</div>
+      <div>{{school.age}}</div>
+      <div>{{aaa}}</div>
+      <!-- 如果数据不变化 视图就不会刷新 -->
+      {{getNewName}}
+      <!-- 我们在内部 会匹配 {{}} -->
+      <ul>
+        <li>1</li>
+        <li>2</li>
+      </ul>
+      <button v-on:click="change">更新操作</button>
+      <div v-html="message"></div>
+    </div>
+    <script src="MVVM.js"></script>
+    <script>
+      // 数据劫持   let a = {name:1} Object.defineProperty('a','name',{set(){alert(1)},get()}
+      let vm = new Vue({
+        el: '#app',
+        data: {
+          school: {
+            name: '小天',
+            age: 10
+          },
+          message: '<h1>小鱼</h1>',
+          aaa: 444444
+        },
+        computed: {
+          getNewName() {
+            return this.school.name + '大雨'
+          }
+        },
+        methods: {
+          change() {
+            this.school.name = '更新'
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
